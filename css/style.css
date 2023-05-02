@@ -1,0 +1,19 @@
+body{
+    
+    background-color:#000;
+    font-family: "San Francisco", sans-serif;
+
+}
+
+.navbar.navbar-dark.navbar-expand-md.bg-dark {
+  background-color: #000;
+}
+
+.fa.fa-apple.apple-logo { 
+  font-size: 32px;
+  line-height: 0.8;
+}
+
+.center_prod {
+  text-align: center;
+}
