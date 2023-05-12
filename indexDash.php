@@ -1,8 +1,5 @@
 <?php
 
-// include php8.0.8
-// include connectDB.php
-// include checkLogin.php
 
 include_once 'connectDB.php';
 include_once 'checkLogin.php';
@@ -51,6 +48,9 @@ if(isset($_SESSION['user_id'])) {
   data-template="vertical-menu-template-free"
 >
   <head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!--link css -->
+
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -119,7 +119,7 @@ if(isset($_SESSION['user_id'])) {
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item active">
-              <a href="index.php" class="menu-link">
+              <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Accueil</div>
               </a>
@@ -132,14 +132,14 @@ if(isset($_SESSION['user_id'])) {
               <span class="menu-header-text">Outils</span>
             </li>
             <li class="menu-item">
-              <a href="" class="menu-link menu-toggle">
+              <a href="javascript:void(0);" class="menu-link menu-toggle ">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
                 <div data-i18n="Account Settings">Parametres du compte</div>
               </a>
               
             </li>
             <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <a href="javascript:void(0);" class="menu-link menu-toggle insideBorder">
                 <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
                 <div data-i18n="Authentications">Changer votre mot de passe</div>
               </a>
@@ -148,7 +148,7 @@ if(isset($_SESSION['user_id'])) {
             
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Produits</span></li>
             <li class="menu-item">
-              <a href="javascript:void(0)" class="menu-link menu-toggle">
+              <a href="javascript:void(0)" class="menu-link menu-toggle insideBorder">
                 <i class="menu-icon tf-icons bx bx-box"></i>
                 <div data-i18n="User interface">Liste des articles</div>
               </a>
@@ -156,7 +156,7 @@ if(isset($_SESSION['user_id'])) {
             </li>
 
             <li class="menu-item">
-              <a href="javascript:void(0)" class="menu-link menu-toggle">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-copy"></i>
                 <div data-i18n="Extended UI">Ajouter un produit</div>
               </a>
@@ -164,19 +164,25 @@ if(isset($_SESSION['user_id'])) {
             </li>
 
             <li class="menu-item">
-              <a href="" class="menu-link">
+              <a href="javascript:void(0);" class="menu-link insideBorder">
                 <i class="menu-icon tf-icons bx bx-crown"></i>
                 <div data-i18n="Boxicons">Modifier un produit</div>
               </a>
             </li>
+
+            <li class="menu-item insideBorder">
+              <a href="javascript:void(0);" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-crown"></i>
+                <div data-i18n="Boxicons">Supprimer un produit</div>
+              </a>
 
           
             <!-- Misc -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
             <li class="menu-item">
               <a
-                href=""
-                target="_blank"
+                href="javascript:void(0);"
+                target=""
                 class="menu-link"
               >
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -185,8 +191,8 @@ if(isset($_SESSION['user_id'])) {
             </li>
             <li class="menu-item">
               <a
-                href=""
-                target="_blank"
+                href="javascript:void(0);"
+                target=""
                 class="menu-link"
               >
                 <i class="menu-icon tf-icons bx bx-file"></i>
@@ -194,7 +200,7 @@ if(isset($_SESSION['user_id'])) {
               </a>
             </li>
             <li class="menu-item">
-              <a href="" class="menu-link">
+              <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-log-out"></i>
                 <div data-i18n="Log out">Se déconnecter</div>
               </a>
@@ -265,13 +271,13 @@ if(isset($_SESSION['user_id'])) {
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item " href="javascript:void(0);" >
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">Profil</span>
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" href="javascript:void(0);" >
                         <i class="bx bx-cog me-2"></i>
                         <span class="align-middle">Parametres</span>
                       </a>
@@ -281,7 +287,7 @@ if(isset($_SESSION['user_id'])) {
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="../../logout.php">
+                      <a class="dropdown-item" href="logout.php">
                         <i class="bx bx-log-out me-2"></i>
                         <span class="align-middle">Se déconnecter</span>
                       </a>
@@ -294,348 +300,11 @@ if(isset($_SESSION['user_id'])) {
           </nav>
 
  
-          <div class="content-wrapper">
   
 
-            <div class="container-xxl flex-grow-1 container-p-y">
-              <div class="row">
-                <div class="col-lg-12 mb-4 order-0">
-                  <div class="card">
-                    <div class="d-flex align-items-end row">
-                      <div class="col-sm-7">
-                        <div class="card-body">
-                          <?php
-                          echo "<h5 class='card-title text-primary'>Bienvenue  $userName !</h5>";
-                            ?>
-                          <p class="mb-4">
-                            Voici votre panneau de configuration de <span class="fw-bold">Apple Tunisie .</span> Vous pouvez ici consulter les différentes commandes , les produits disponibles , les modifiers ou les supprimers.
-                          </p>
+          <div id="content"></div>
 
-                        </div>
-                      </div>
-                      <div class="col-sm-5 text-center text-sm-left">
-                        <div class="card-body pb-0 px-0 px-md-4">
-                          <img
-                            src="Dashboard/assets/img/illustrations/man-with-laptop-light.png"
-                            height="140"
-                            alt="View Badge User"
-                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                            data-app-light-img="illustrations/man-with-laptop-light.png"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-4 order-1">
-                  <div class="row">
-                    <div class="col-lg-6 col-md-12 col-6 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img
-                                src="../assets/img/icons/unicons/chart-success.png"
-                                alt="chart success"
-                                class="rounded"
-                              />
-                            </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt3"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                              >
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <span class="fw-semibold d-block mb-1">Chiffre Affaires</span>
-                          <h3 class="card-title mb-2">120,628 DT</h3>
-                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-6 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img
-                                src="../assets/img/icons/unicons/wallet-info.png"
-                                alt="Credit Card"
-                                class="rounded"
-                              />
-                            </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt6"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                              >
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              
-                            </div>
-                          </div>
-                          <span>Ventes du Mois</span>
-                          <h3 class="card-title text-nowrap mb-1">8,679 DT </h3>
-                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-            
-                <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
-                  <div class="row">
-                    
-                    <div class="col-6 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                 
-                              <img
-                                src="../assets/img/icons/unicons/phone.png"
-                                alt="Phone"
-                                class="rounded"
-                              />
-                            </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt4"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                              >
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              
-                            </div>
-                          </div>
-                          <span class="d-block mb-1">Articles Vendus</span>
-                          <h3 class="card-title text-nowrap mb-2">13</h3>
-                          <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-6 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
-                            </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt1"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                              >
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <span class="fw-semibold d-block mb-1">Transactions</span>
-                          <h3 class="card-title mb-2">$14,857</h3>
-                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
-                        </div>
-                      </div>
-                    </div>
-                   
-                   
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-             
-                <div class="col-md-6 col-lg-4 col-xl-6 order-0 mb-4">
-                  <div class="card h-100">
-                    <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                      <div class="card-title mb-0">
-                        <h5 class="m-0 me-2">Statistiques des commandes</h5>
-                        <small class="text-muted">999900 DT Totale</small>
-                      </div>
-                      <div class="dropdown">
-                        <button
-                          class="btn p-0"
-                          type="button"
-                          id="orederStatistics"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          <i class="bx bx-dots-vertical-rounded"></i>
-                        </button>
-                        
-                      </div>
-                    </div>
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div class="d-flex flex-column align-items-center gap-1">
-                          <h2 class="mb-2">999990 DT</h2>
-                          <span>Totale des ventes</span>
-                        </div>
-                        <div id="orderStatisticsChart"></div>
-                      </div>
-                      <ul class="p-0 m-0">
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-primary"
-                              ><i class="bx bx-mobile-alt"></i
-                            ></span>
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <h6 class="mb-0">iPhones</h6>
-                              <small class="text-muted">iPhones 12 , 13 , 14</small>
-                            </div>
-                            <div class="user-progress">
-                              <small class="fw-semibold">8223,33 DT</small>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-success"><i class="bx bx-closet"></i></span>
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <h6 class="mb-0">iPad</h6>
-                              <small class="text-muted">iPad , iPencil ..</small>
-                            </div>
-                            <div class="user-progress">
-                              <small class="fw-semibold">23800 DT</small>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-info"><i class="bx bx-home-alt"></i></span>
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <h6 class="mb-0">iMac</h6>
-                              <small class="text-muted">iMac M1 , M2 </small>
-                            </div>
-                            <div class="user-progress">
-                              <small class="fw-semibold">849OO DT</small>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <span class="avatar-initial rounded bg-label-secondary"
-                              ><i class="bx bx-football"></i
-                            ></span>
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <h6 class="mb-0">Apple TV</h6>
-                              <small class="text-muted">Abonnement Apple TV</small>
-                            </div>
-                            <div class="user-progress">
-                              <small class="fw-semibold">990 DT</small>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-          
-                <div class="col-md-6 col-lg-6 order-1 mb-4">
-                  <div class="card h-100">
-                    <div class="card-header">
-                      <ul class="nav nav-pills" role="tablist">
-                        <li class="nav-item">
-                          <button
-                            type="button"
-                            class="nav-link active"
-                            role="tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#navs-tabs-line-card-income"
-                            aria-controls="navs-tabs-line-card-income"
-                            aria-selected="true"
-                          >
-                            Vente Personelle
-                          </button>
-                        </li>
-                       
-                       
-                      </ul>
-                    </div>
-                    <div class="card-body px-0">
-                      <div class="tab-content p-0">
-                        <div class="tab-pane fade show active" id="navs-tabs-line-card-income" role="tabpanel">
-                          <div class="d-flex p-4 pt-3">
-                            <div class="avatar flex-shrink-0 me-3">
-                              <img src="../assets/img/icons/unicons/wallet.png" alt="User" />
-                            </div>
-                            <div>
-                              <small class="text-muted d-block">Totale vente </small>
-                              <div class="d-flex align-items-center">
-                                <h6 class="mb-0 me-1">459,100 DT</h6>
-                                <small class="text-success fw-semibold">
-                                  <i class="bx bx-chevron-up"></i>
-                                  32.9%
-                                </small>
-                              </div>
-                            </div>
-                          </div>
-                          <div id="incomeChart"></div>
-                          <div class="d-flex justify-content-center pt-4 gap-2">
-                            <div class="flex-shrink-0">
-                              <div id="expensesOfWeek"></div>
-                            </div>
-                            <div>
-                              <p class="mb-n1 mt-1">Pourcentage des ventes de la semaine</p>
-                              <small class="text-muted">390 DT moins de la semaine précedente</small>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                </div>
-              
-             
-            </div>
 
-            <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , Bouhamed Iheb , Elloumi Ahmed , Abdelmoula Khadija
-                </div>
-              
-              </div>
-            </footer>
 
             <div class="content-backdrop fade"></div>
           </div>
@@ -648,23 +317,32 @@ if(isset($_SESSION['user_id'])) {
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../assets/vendor/js/bootstrap.js"></script>
-    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <script src="../assets/vendor/js/menu.js"></script>
+    <script src="dashboardScript.js"></script>
+
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
     <!-- Main JS -->
-    <script src="../assets/js/main.js"></script>
 
     <!-- Page JS -->
     <script src="../assets/js/dashboards-analytics.js"></script>
 
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    
   </body>
+
+  <footer class="content-footer footer bg-footer-theme">
+              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <div class="mb-2 mb-md-0">
+                  ©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  , Bouhamed Iheb , Elloumi Ahmed , Abdelmoula Khadija
+                </div>
+              
+              </div>
+            </footer>
 </html>

@@ -2,10 +2,9 @@
 * demo.css
 * File include item demo only specific css only
 ******************************************************************************/
-body{
-  font-family: "San Francisco", sans-serif;
 
-}
+
+
 .menu .app-brand.demo {
   height: 64px;
   margin-top: 12px;
@@ -19,6 +18,7 @@ body{
 .app-brand-text.demo {
   font-size: 1.75rem;
   letter-spacing: -0.5px;
+  text-transform: lowercase;
 }
 
 /* ! For .layout-navbar-fixed added fix padding top tpo .layout-page */
@@ -39,6 +39,11 @@ body{
 /*
 * Content
 ******************************************************************************/
+body{
+    
+  font-family: "San Francisco", sans-serif;
+
+}
 
 .demo-blocks > * {
   display: block !important;

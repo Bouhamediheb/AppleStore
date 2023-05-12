@@ -11,7 +11,10 @@ if (!$conn) {
     die("Erreur de connexion : " . mysqli_connect_error());
 }
 
-session_start();
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (isset($_POST['email']) && isset($_POST['password'])) {
 

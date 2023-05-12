@@ -17,3 +17,25 @@ body{
 .center_prod {
   text-align: center;
 }
+td{
+  color: black;
+}
+
+.cart-table {
+margin-top: 50px;
+}
+.cart-table th {
+font-weight: 700;
+font-size: 18px;
+text-align: center;
+vertical-align: middle;
+}
+.cart-table td {
+font-size: 16px;
+text-align: center;
+vertical-align: middle;
+}
+.cart-table td img {
+max-height: 50px;
+margin-right: 10px;
+}

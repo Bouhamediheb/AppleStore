@@ -1,5 +1,6 @@
 <?php
-
+// Start session
+session_start();
 include 'connectDB.php';
 include 'checkLogin.php';
 
@@ -13,14 +14,18 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['userName'])) {
 } else {
 
 }
-?>
 
+$total = 0;
+
+
+
+
+?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title> Apple Store</title>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -32,8 +37,10 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['userName'])) {
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
 
-</head>
 
+
+	
+</head>
 <body>
 
   <nav class="navbar navbar-dark navbar-expand-sm bg-dark">
@@ -80,160 +87,94 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['userName'])) {
 
   </nav>
 
-
-
-  <div class="container-fluid bg-white text-light py-5 text-center">
-    <div class="row">
-      <div class="col-md-6 mx-auto">
-        <h1 class="display-4 text-dark fw-bold">Bientôt en Tunisie ..</h1>
-        <p class="lead text-dark">Soyez au rendez-vous pour voir nos derniers iPhones 15 dans une expérience innovante à
-          l'Institut International de Technologie NAPU Sfax.</p>
+  <div class="container-fluid bg-white text-light py-3 pt-3 text-center">
+  <div class="col-md-6 mx-auto">
+        <h1 class="display-4 text-dark fw-bold">Votre panier</h1>
+        <p class="lead text-dark">Veuillez vérifier la liste des articles dans le tableau avant de confirmer votre commande</p>
       </div>
-
-      <div class="container-fluid bg-white text-light py-3 text-center">
-
-      </div>
-      <div class="row">
-        <div class="col-md-6 mx-auto">
-          <img src="images/appleSetup.png" class="img-fluid">
-        </div>
-
-        <div class="container-fluid bg-white text-light py-3 text-center"></div>
-
-
-
-
-        <div class="container-fluid bg-dark text-light py-5 text-center" style="background-color:black !important;">
-          <div class="row">
-            <div class="col-md-6 mx-auto">
-              <h1 class="display-4">iPhone 12</h1>
-              <p class="lead">La créme de la créme des iPhones.</p>
-              <a href="index.php" class="btn btn-lg text-light">Voir en détail</a>
-              <a href="index.php" class="btn btn-lg text-primary">Acheter</a>
-
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mx-auto">
-              <img src="images/iphone122.png" class="img-fluid">
-            </div>
-          </div>
-        </div>
-
-        <div class="container-fluid bg-white text-light py-5 text-center">
-          <div class="row">
-            <div class="col-md-6 mx-auto">
-              <h1 class="display-4 text-dark">iPhone 14</h1>
-              <p class="lead text-dark">Le prestigieux</p>
-              <a href="index.php" class="btn btn-lg text-dark">Voir en détail</a>
-              <a href="index.php" class="btn btn-lg text-primary">Acheter</a>
-
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mx-auto">
-              <img src="images/iphone14.png" class="img-fluid">
-            </div>
-          </div>
-        </div>
-
-        <div class="container-fluid bg-white text-light py-5 text-center">
-          <div class="row">
-            <div class="col-md-6 mx-auto">
-              <h1 class="display-5 text-dark font-weight-bold">Quel produit apple vous vient ?
-              </h1>
-
-
-            </div>
-          </div>
-          <div class="row">
-
-          </div>
-        </div>
-
-        <div class="container center_prod">
-          <div class="row center_prod ">
-            <?php
-            $conn = mysqli_connect("localhost", "root", "root", "DataBaseProjetWeb");
-            $sql = "SELECT * FROM Products";
-            $result = mysqli_query($conn, $sql);
-
-            while ($row = mysqli_fetch_assoc($result)) {
-              echo '<div class="col-md-3 mb-2 px-5">';
-              echo '<div class="px-2" style="display:table-cell; vertical-align:middle; text-align:center">';
-              echo '<td>' . '<img src="data:image/png;base64,' . base64_encode($row['imageProduct']) . '" width=100" height="100" />' . '</td>';
-              echo '<div class="card-body">';
-              echo '<h5 class="card-title text-dark">' . $row['NameProd'] . '</h5>';
-              echo '<p class="card-text text-dark">Prix:' . $row['PriceProd'] . '</p>';
-              echo '<button type="button" class="btn btn-primary ajout-panier" data-id="' . $row['id'] . '" data-name-prod="' . $row['NameProd'] . '" data-price="' . $row['PriceProd'] . '" data-image-prod="' . base64_encode($row['imageProduct']) . '">Ajouter au panier</button>';
-              echo '</div>';
-              echo '</div>';
-              echo '</div>';
-              
+    <?php if (!empty($_SESSION["cart"])) { ?>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>Nom du produit</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Totale</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($_SESSION["cart"] as $item) {
+                    $total_item = $item["price"] * $item["quantity"];
+                    $total += $total_item;
+                ?>
+                    <tr>
+                        <?php if ($item['image']): ?>
+                            <td><img src="data:image/png;base64,<?= $item['image'] ?>" alt="<?= $item['name'] ?>" style="max-width: 100px; max-height: 100px;"></td>
+                        <?php else: ?>
+                            <td>No image available</td>
+                        <?php endif; ?>
+                        <td><?= $item["name"] ?></td>
+                        <td><?= $item["price"] ?></td>
+                        <td><?= $item["quantity"] ?></td>
+                        <td><?= $total_item ?></td>
+                        <td><a href='suppPanier.php?id=<?= $item["id"] ?>'>Supprimer</a></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" class="text-right"><strong>Total:</strong></td>
+                    <td colspan="2"><?= $total ?> TND</td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                        <form action="" method="post">
+                            <input type="hidden" name="commande" value="1">
+                            <button type="submit" class="btn btn-primary float-right">Commande</button>
+                        </form>
+                    </td>
+                </tr>
+                <?php if (isset($_POST["commande"])) {
+                    // Insérer la requête SQL pour enregistrer la commande dans la base de données
+                    // vérifier si user is logged
+                    if (isset($_SESSION['user_id'])) {
+                        $user_id = $_SESSION['user_id'];
+                        $sql = "INSERT INTO commande (user_id, total) VALUES ('$user_id', '$total')";
+                        $result = mysqli_query($conn, $sql);
+                        if ($result) {
+                            $commande_id = mysqli_insert_id($conn);
+                            foreach ($_SESSION["cart"] as $item) {
+                                $product_id = $item['id'];
+                                $quantity = $item['quantity'];
+                                $sql = "INSERT INTO commande_produit (commande_id, product_id, quantity) VALUES ('$commande_id', '$product_id', '$quantity')";
+                                $result = mysqli_query($conn, $sql);
+                            }
+                            if ($result) {
+                                echo "<script>alert('Votre commande a été enregistrée avec succès.')</script>";
+                                unset($_SESSION["cart"]);
+                                echo "<script>window.location = 'index.php'</script>";
+                            }
+                        }
+                    } else {
+                        echo "<script>alert('Veuillez vous connecter pour passer une commande.')</script>";
+                        echo "<script>window.location = 'login.php'</script>";
+                    }
+                } ?>
+            </tfoot>
+        </table>
+    <?php } else { ?>
+        <p>Votre panier est vide. Commencer par ajouter quelques produits.</p>
+    <?php } ?>
+</div>
 
 
-            }
-
-
-            ?>
-          </div>
-        </div>
-
-
-
-
-
-
-
-        <!-- Bootstrap JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
-        <script src="https://kit.fontawesome.com/b04f244140.js" crossorigin="anonymous"></script>
-<script>
-	$(document).ready(function() {
-  // Add to Cart button clicked
-  $(".ajout-panier").click(function() {
-    var id = $(this).data("id");
-var name = $(this).data("name-prod");
-var price = $(this).data("price");
-var image = $(this).data("image-prod");
-var quantity = 1;
-
-    // alert
-    console.log(id);
-    console.log(name);
-    console.log(price);
-    console.log(image);
-  console.log(quantity);
-    $.ajax({
-      url: 'ajoutPanier.php',
-      method: 'POST',
-      data: {
-        id: id,
-        name: name,
-        price: price,
-        image: image,
-        quantity: quantity
-      },
-      success: function(data) {
-        alert("Produit ajouté au panier");
-
-
-        
-      }
-      
-    });
-  });
-});
-
-					
-</script>
-
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Bootstrap JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
-
-
-
-
-
 
 <!-- Footer -->
 <footer class="text-center text-lg-start bg-white text-muted">
@@ -352,7 +293,4 @@ var quantity = 1;
   </div>
 
 </footer>
-
-
-
 </html>

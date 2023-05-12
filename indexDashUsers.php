@@ -1,14 +1,17 @@
 <?php
 
 // include php8.0.8
-require dirname(__DIR__).'../../connectDB.php';
-require dirname(__DIR__).'../../checkLogin.php';
+// include connectDB.php
+// include checkLogin.php
+
+include_once 'connectDB.php';
+include_once 'checkLogin.php';
 
 if(isset($_SESSION['user_id'])) {
   $CIN = $_SESSION['user_id'];
   $conn = mysqli_connect("localhost", "root", "root", "DataBaseProjetWeb");
   if (!$conn) {
-      die("La connexion a échoué: " . mysqli_connect_error());
+      die("Erreur de connexion : " . mysqli_connect_error());
   }
   $sql = "SELECT * FROM Users WHERE CIN = $CIN";
   $result = mysqli_query($conn, $sql);
@@ -28,14 +31,11 @@ if(isset($_SESSION['user_id'])) {
 
       
 
-      // Ajouter d'autres champs selon les besoins
   } else {
       echo "Aucun résultat trouvé";
   }
-  // Fermer la connexion à la base de données
   mysqli_close($conn);
 } else {
-  // Rediriger l'utilisateur vers la page de connexion
   header('Location: login.php');
   exit();
 }
@@ -47,7 +47,7 @@ if(isset($_SESSION['user_id'])) {
   class="light-style layout-menu-fixed"
   dir="ltr"
   data-theme="theme-default"
-  data-assets-path="../assets/"
+  data-assets-path="Dashboard/assets/"
   data-template="vertical-menu-template-free"
 >
   <head>
@@ -57,12 +57,12 @@ if(isset($_SESSION['user_id'])) {
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Dashboard</title>
 
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="Dashboard/assets/img/favicon/favicon.ico" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -73,45 +73,40 @@ if(isset($_SESSION['user_id'])) {
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="Dashboard/assets/vendor/fonts/boxicons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="../assets/css/demo.css" />
+    <link rel="stylesheet" href="Dashboard/assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="Dashboard/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="Dashboard/assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href=/Dahsboard/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
-    <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+    <link rel="stylesheet" href="Dashboard/assets/vendor/libs/apex-charts/apex-charts.css" />
 
     <!-- Page CSS -->
 
     <!-- Helpers -->
-    <script src="../assets/vendor/js/helpers.js"></script>
+    <script src="Dashboard/assets/vendor/js/helpers.js"></script>
 
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../assets/js/config.js"></script>
+   
+    <script src="Dashboard/assets/js/config.js"></script>
   </head>
 
   <body>
-    <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
-        <!-- Menu -->
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-          <div class="app-brand demo">
+          <div class="app-brand demo justify-content-md-center">
             <a href="index.php" class="app-brand-link">
               <span class="app-brand-logo demo">
-                <!-- apple image from images folder .. -->
-                <img src="../../images/apple.png" alt="Brand Logo" class="img-fluid" height="40" width="40" />
+                <img src="images/apple.png" alt="Brand Logo" class="img-fluid" height="40" width="40" />
               
 
                  
               </span>
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">Apple Tunisia</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -151,9 +146,7 @@ if(isset($_SESSION['user_id'])) {
               
             </li>
             
-            <!-- Components -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Produits</span></li>
-            <!-- Cards -->
             <li class="menu-item">
               <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-box"></i>
@@ -162,7 +155,6 @@ if(isset($_SESSION['user_id'])) {
               
             </li>
 
-            <!-- Extended components -->
             <li class="menu-item">
               <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-copy"></i>
@@ -201,7 +193,6 @@ if(isset($_SESSION['user_id'])) {
                 <div data-i18n="Documentation">Documentation</div>
               </a>
             </li>
-            <!-- Log out -->
             <li class="menu-item">
               <a href="" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-log-out"></i>
@@ -209,11 +200,8 @@ if(isset($_SESSION['user_id'])) {
               </a>
           </ul>
         </aside>
-        <!-- / Menu -->
-
-        <!-- Layout container -->
+     
         <div class="layout-page">
-          <!-- Navbar -->
 
           <nav
             class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
@@ -226,7 +214,6 @@ if(isset($_SESSION['user_id'])) {
             </div>
 
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              <!-- Search -->
               <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
                   <i class="bx bx-search fs-4 lh-0"></i>
@@ -238,7 +225,6 @@ if(isset($_SESSION['user_id'])) {
                   />
                 </div>
               </div>
-              <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                
@@ -247,7 +233,7 @@ if(isset($_SESSION['user_id'])) {
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="Dashboard/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -261,9 +247,7 @@ if(isset($_SESSION['user_id'])) {
                           </div>
                           <div class="flex-grow-1">
                             <?php
-                            // check if user admin
                             if (isset($_SESSION['admin'])) {
-                              // echo h6 userName
                               echo "<h6 class='mb-0'> $userName $userLastName</h6>";
                               echo '<span class="text-muted">
                               <i class="bx bx-badge-check me-1"></i>Online</span>';
@@ -309,11 +293,9 @@ if(isset($_SESSION['user_id'])) {
             </div>
           </nav>
 
-          <!-- / Navbar -->
-
-          <!-- Content wrapper -->
+ 
           <div class="content-wrapper">
-            <!-- Content -->
+  
 
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row">
@@ -334,7 +316,7 @@ if(isset($_SESSION['user_id'])) {
                       <div class="col-sm-5 text-center text-sm-left">
                         <div class="card-body pb-0 px-0 px-md-4">
                           <img
-                            src="../assets/img/illustrations/man-with-laptop-light.png"
+                            src="Dashboard/assets/img/illustrations/man-with-laptop-light.png"
                             height="140"
                             alt="View Badge User"
                             data-app-dark-img="illustrations/man-with-laptop-dark.png"
@@ -415,7 +397,7 @@ if(isset($_SESSION['user_id'])) {
                   </div>
                 </div>
                 
-                <!--/ Total Revenue -->
+            
                 <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
                   <div class="row">
                     
@@ -424,7 +406,7 @@ if(isset($_SESSION['user_id'])) {
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="avatar flex-shrink-0">
-                              <!-- Phone Icon Font Awesome-->
+                 
                               <img
                                 src="../assets/img/icons/unicons/phone.png"
                                 alt="Phone"
@@ -487,7 +469,7 @@ if(isset($_SESSION['user_id'])) {
                 </div>
               </div>
               <div class="row">
-                <!-- Order Statistics -->
+             
                 <div class="col-md-6 col-lg-4 col-xl-6 order-0 mb-4">
                   <div class="card h-100">
                     <div class="card-header d-flex align-items-center justify-content-between pb-0">
@@ -582,9 +564,7 @@ if(isset($_SESSION['user_id'])) {
                     </div>
                   </div>
                 </div>
-                <!--/ Order Statistics -->
-
-                <!-- Expense Overview -->
+          
                 <div class="col-md-6 col-lg-6 order-1 mb-4">
                   <div class="card h-100">
                     <div class="card-header">
@@ -643,9 +623,7 @@ if(isset($_SESSION['user_id'])) {
               
              
             </div>
-            <!-- / Content -->
 
-            <!-- Footer -->
             <footer class="content-footer footer bg-footer-theme">
               <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                 <div class="mb-2 mb-md-0">
@@ -658,16 +636,12 @@ if(isset($_SESSION['user_id'])) {
               
               </div>
             </footer>
-            <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
           </div>
-          <!-- Content wrapper -->
         </div>
-        <!-- / Layout page -->
       </div>
 
-      <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
  
@@ -691,7 +665,6 @@ if(isset($_SESSION['user_id'])) {
     <!-- Page JS -->
     <script src="../assets/js/dashboards-analytics.js"></script>
 
-    <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
