@@ -104,65 +104,31 @@ $total = 0;
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
-                <?php foreach ($_SESSION["cart"] as $item) {
-                    $total_item = $item["price"] * $item["quantity"];
-                    $total += $total_item;
-                ?>
-                    <tr>
-                        <?php if ($item['image']): ?>
-                            <td><img src="data:image/png;base64,<?= $item['image'] ?>" alt="<?= $item['name'] ?>" style="max-width: 100px; max-height: 100px;"></td>
-                        <?php else: ?>
-                            <td>No image available</td>
-                        <?php endif; ?>
-                        <td><?= $item["name"] ?></td>
-                        <td><?= $item["price"] ?></td>
-                        <td><?= $item["quantity"] ?></td>
-                        <td><?= $total_item ?></td>
-                        <td><a href='suppPanier.php?id=<?= $item["id"] ?>'>Supprimer</a></td>
-                    </tr>
-                <?php } ?>
-            </tbody>
-            <tfoot>
+            <form method="post" action="commander.php">
+    <table>
+        <tbody>
+            <?php foreach ($_SESSION["cart"] as $item) {
+                $total_item = $item["price"] * $item["quantity"];
+                $total += $total_item;
+            ?>
                 <tr>
-                    <td colspan="4" class="text-right"><strong>Total:</strong></td>
-                    <td colspan="2"><?= $total ?> TND</td>
+                    <?php if ($item['image']): ?>
+                        <td><img src="data:image/png;base64,<?= $item['image'] ?>" alt="<?= $item['name'] ?>" style="max-width: 100px; max-height: 100px;"></td>
+                    <?php else: ?>
+                        <td>No image available</td>
+                    <?php endif; ?>
+                    <td><?= $item["name"] ?></td>
+                    <td><?= $item["price"] ?></td>
+                    <td><?= $item["quantity"] ?></td>
+                    <td><?= $total_item ?></td>
+                    <td><a href='suppPanier.php?id=<?= $item["id"] ?>'>Supprimer</a></td>
                 </tr>
-                <tr>
-                    <td colspan="6">
-                        <form action="" method="post">
-                            <input type="hidden" name="commande" value="1">
-                            <button type="submit" class="btn btn-primary float-right">Commande</button>
-                        </form>
-                    </td>
-                </tr>
-                <?php if (isset($_POST["commande"])) {
-                    // Insérer la requête SQL pour enregistrer la commande dans la base de données
-                    // vérifier si user is logged
-                    if (isset($_SESSION['user_id'])) {
-                        $user_id = $_SESSION['user_id'];
-                        $sql = "INSERT INTO commande (user_id, total) VALUES ('$user_id', '$total')";
-                        $result = mysqli_query($conn, $sql);
-                        if ($result) {
-                            $commande_id = mysqli_insert_id($conn);
-                            foreach ($_SESSION["cart"] as $item) {
-                                $product_id = $item['id'];
-                                $quantity = $item['quantity'];
-                                $sql = "INSERT INTO commande_produit (commande_id, product_id, quantity) VALUES ('$commande_id', '$product_id', '$quantity')";
-                                $result = mysqli_query($conn, $sql);
-                            }
-                            if ($result) {
-                                echo "<script>alert('Votre commande a été enregistrée avec succès.')</script>";
-                                unset($_SESSION["cart"]);
-                                echo "<script>window.location = 'index.php'</script>";
-                            }
-                        }
-                    } else {
-                        echo "<script>alert('Veuillez vous connecter pour passer une commande.')</script>";
-                        echo "<script>window.location = 'login.php'</script>";
-                    }
-                } ?>
-            </tfoot>
+            <?php } ?>
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary float-right">Commande</button>
+</form>
+
         </table>
     <?php } else { ?>
         <p>Votre panier est vide. Commencer par ajouter quelques produits.</p>

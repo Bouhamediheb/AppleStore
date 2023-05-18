@@ -15,10 +15,10 @@ $id = $_POST['id'];
 $sql = "DELETE FROM Products WHERE id='$id'";
 
 if (mysqli_query($conn, $sql)) {
-  echo "Article updated successfully";
+  echo "Article supprimée avec succès";
 } else {
-  echo "Error updating article: " . mysqli_error($conn);
-}
+  echo "Erreur suppression : " . mysqli_error($conn);
+  }
 
 mysqli_close($conn);
 

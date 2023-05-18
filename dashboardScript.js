@@ -1,4 +1,13 @@
 $(document).ready(function() {
+
+
+  $(document).on('click', '.menu-item:nth-child(3)', function() {
+    // Update the content on the right side of the page
+    $('#content').load('listeProdDash.php');
+
+  });
+  
+
     // Add event listeners to each menu item
     $(document).on('click', '.menu-item.active', function() {
       // Update the content on the right side of the page
@@ -26,9 +35,10 @@ $(document).ready(function() {
 
     $(document).on('click', '.menu-item:nth-child(9)', function() {
       // Update the content on the right side of the page
-      $('#content').load('supprProduit.php');
+      $('#content').load('listeCommande.php');
 
     });
+
 
 
     

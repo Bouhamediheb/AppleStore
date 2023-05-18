@@ -19,63 +19,50 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 <DOCTYPE html>
 <html>
-
 <head>
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Bootstrap CSS and JS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
   <!--link css -->
 
-  <meta charset="utf-8" />
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
 
-  <title>Dashboard</title>
+    <title>Dashboard</title>
 
-  <meta name="description" content="" />
+    <meta name="description" content="" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="Dashboard/assets/img/favicon/favicon.ico" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="Dashboard/assets/img/favicon/favicon.ico" />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-    rel="stylesheet" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Icons. Uncomment required icon fonts -->
-  <link rel="stylesheet" href="Dashboard/assets/vendor/fonts/boxicons.css" />
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="Dashboard/assets/vendor/fonts/boxicons.css" />
 
-  <!-- Core CSS -->
-  <link rel="stylesheet" href="Dashboard/assets/vendor/css/core.css" class="template-customizer-core-css" />
-  <link rel="stylesheet" href="Dashboard/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-  <link rel="stylesheet" href="Dashboard/assets/css/demo.css" />
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="Dashboard/assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="Dashboard/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="Dashboard/assets/css/demo.css" />
 
-  <!-- Vendors CSS -->
-  <link rel="stylesheet" href=/Dahsboard/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <!-- Vendors CSS -->
 
-  <link rel="stylesheet" href="Dashboard/assets/vendor/libs/apex-charts/apex-charts.css" />
 
-  <!-- Page CSS -->
+    <!-- Page CSS -->
 
-  <!-- Helpers -->
-  <script src="Dashboard/assets/vendor/js/helpers.js"></script>
-  <script src="Dashboard/assets/js/config.js"></script>
-
-</head>
-
+    <!-- Helpers -->
+    <script src="Dashboard/assets/vendor/js/helpers.js"></script>
+    <script src="Dashboard/assets/js/config.js"></script>
+  </head>
 
 
 <body>
@@ -128,7 +115,7 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
             echo '<div class="card-body">';
             echo '<h5 class="card-title text-dark">' . $row['NameProd'] . '</h5>';
             echo '<p class="card-text text-dark">Prix:' . $row['PriceProd'] . '</p>';
-            echo '<button type="button" class="btn btn-primary edit-article" data-id="' . $row['id'] . '" data-name-prod="' . $row['NameProd'] . '" data-price="' . $row['PriceProd'] . '" data-image-prod="' . base64_encode($row['imageProduct']) . '">Supprimer article</button>';
+            echo '<button type="button" class="btn btn-primary delete-article" data-id="' . $row['id'] . '" data-name-prod="' . $row['NameProd'] . '" data-price="' . $row['PriceProd'] . '" data-image-prod="' . base64_encode($row['imageProduct']) . '">Supprimer article</button>';
             echo '</div>';
             echo '</div>';
             echo '</div>';
@@ -173,8 +160,11 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
               data: { id: id },
               success: function (response) {
                 $('#deleteArticleDialog').modal('hide');
-                alert('L\'article a été supprimé avec succès !');
-                location.reload();
+                //show message with delay 3 seconds
+                setTimeout(function () {
+                  alert("Article supprimé avec succès");
+                  location.reload();
+                }, 3000);
               }
             });
           });
@@ -182,40 +172,25 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
       });
 
     </script>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-
-
-    <!-- Core JS -->
+     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../assets/vendor/js/bootstrap.js"></script>
-    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="Dashboard/assets/vendor/libs/popper/popper.js"></script>
+    <script src="Dashboard/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="dashboardScript.js"></script>
 
-    <script src="../assets/vendor/js/menu.js"></script>
+    <script src="Dashboard/assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <script src="Dashboard/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
     <!-- Main JS -->
-    <script src="../assets/js/main.js"></script>
+    <script src="Dashboard/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="../assets/js/dashboards-analytics.js"></script>
 
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Bootstrap CSS and JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
+    
 
 </body>
 

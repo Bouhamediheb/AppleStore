@@ -49,6 +49,7 @@ if(isset($_SESSION['user_id'])) {
 >
   <head>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <!--link css -->
 
     <meta charset="utf-8" />
@@ -81,16 +82,12 @@ if(isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="Dashboard/assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href=/Dahsboard/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
-    <link rel="stylesheet" href="Dashboard/assets/vendor/libs/apex-charts/apex-charts.css" />
 
     <!-- Page CSS -->
 
     <!-- Helpers -->
     <script src="Dashboard/assets/vendor/js/helpers.js"></script>
-
-   
     <script src="Dashboard/assets/js/config.js"></script>
   </head>
 
@@ -175,7 +172,16 @@ if(isset($_SESSION['user_id'])) {
                 <i class="menu-icon tf-icons bx bx-crown"></i>
                 <div data-i18n="Boxicons">Supprimer un produit</div>
               </a>
+            </li>
 
+            <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link" id="Cmd">
+              <i class="menu-icon tf-icons bx bx-crown"></i>
+                <div data-i18n="Boxicons">Liste des commandes</div>
+              </a>
+            </li>
+
+            
           
             <!-- Misc -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
@@ -248,7 +254,7 @@ if(isset($_SESSION['user_id'])) {
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="Dashboard/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
@@ -327,7 +333,6 @@ if(isset($_SESSION['user_id'])) {
     <!-- Main JS -->
 
     <!-- Page JS -->
-    <script src="../assets/js/dashboards-analytics.js"></script>
 
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     
